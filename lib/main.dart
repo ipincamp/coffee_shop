@@ -1,4 +1,4 @@
-// import 'package:coffee_shop/screens/register.dart';
+import 'package:coffee_shop/pallete.dart';
 import 'package:coffee_shop/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
@@ -21,8 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Coffee Shop',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        primaryColor: CoffeeShopColors.coffeeBrown,
+        scaffoldBackgroundColor: CoffeeShopColors.cream,
+        fontFamily: 'Merriweather',
       ),
       home: const WelcomeScreen(),
     );
