@@ -1,5 +1,3 @@
-import 'package:coffee_shop/pallete.dart';
-import 'package:coffee_shop/tipografy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,55 +6,40 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    var imageSize = screenSize.width * 0.25;
+
     return Scaffold(
-      backgroundColor: CoffeeShopColors.cream,
       body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Coffee Shop',
-                style: CoffeeShopTextStyles.heading,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 20),
-              SvgPicture.asset(
-                'assets/icons/coffee.svg',
-                height: 150,
-              ),
-              SizedBox(height: 40),
-              ElevatedButton(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SvgPicture.asset(
+              'assets/icons/coffee.svg',
+              width: imageSize,
+              height: imageSize,
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: screenSize.width * 0.30,
+              child: ElevatedButton(
                 onPressed: () {
-                  // Navigator.pushNamed(context, '/register');
+                  // Navigate to login screen
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: CoffeeShopColors.coffeeBrown,
-                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: Text(
-                  'Daftar',
-                  style: CoffeeShopTextStyles.button,
-                ),
+                child: Text('Login'.toUpperCase()),
               ),
-              SizedBox(height: 10),
-              TextButton(
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              width: screenSize.width * 0.30,
+              child: ElevatedButton(
                 onPressed: () {
-                  // Navigator.pushNamed(context, '/login');
+                  // Navigate to register screen
                 },
-                child: Text(
-                  'Masuk',
-                  style: CoffeeShopTextStyles.subheading.copyWith(
-                    color: CoffeeShopColors.coffeeBrown,
-                  ),
-                ),
+                child: Text('Register'.toUpperCase()),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
