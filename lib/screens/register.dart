@@ -1,4 +1,5 @@
 import 'package:coffee_shop/pallete.dart';
+import 'package:coffee_shop/screens/dashboard/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -101,6 +102,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 String password = _passwordController.text;
                 String confirmPassword = _confirmPasswordController.text;
                 */
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ),
+                );
               },
               child: const Text('Register'),
             ),

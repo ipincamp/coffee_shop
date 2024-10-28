@@ -1,4 +1,5 @@
 import 'package:coffee_shop/pallete.dart';
+import 'package:coffee_shop/screens/dashboard/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -52,18 +53,20 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: _passwordController,
               obscureText: _isPasswordVisible,
               decoration: InputDecoration(
-              labelText: 'Password',
-              border: OutlineInputBorder(),
-              suffixIcon: IconButton(
-                icon: Icon(
-                _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
                 ),
-                onPressed: () {
-                setState(() {
-                  _isPasswordVisible = !_isPasswordVisible;
-                });
-                },
-              ),
               ),
             ),
             SizedBox(height: 20),
@@ -75,6 +78,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 String email = _emailController.text;
                 String password = _passwordController.text;
                 */
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ),
+                );
               },
               child: const Text('Login'),
             ),
