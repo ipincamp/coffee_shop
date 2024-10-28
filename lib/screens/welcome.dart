@@ -1,3 +1,4 @@
+import 'package:coffee_shop/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:coffee_shop/pallete.dart';
@@ -50,7 +51,12 @@ class WelcomeScreen extends StatelessWidget {
               width: screenSize.width * 0.48,
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigate to register screen
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RegisterScreen(),
+                    ),
+                  );
                 },
                 child: Text('Register'.toUpperCase()),
               ),
