@@ -1,4 +1,4 @@
-import 'package:coffee_shop/screens/login.dart';
+import 'package:coffee_shop/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
+                    builder: (context) => const WelcomeScreen(),
                   ),
                 );
               },
@@ -213,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
     required Color color,
   }) {
     return Container(
-      width: 100,
+      width: 50,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(15),
@@ -224,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Icon(
             icon,
             color: Colors.white,
-            size: 32,
+            size: 16,
           ),
           SizedBox(height: 5),
           Text(
