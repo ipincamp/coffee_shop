@@ -2,12 +2,20 @@ import 'package:coffee_shop/pallete.dart';
 import 'package:coffee_shop/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:provider/provider.dart';
+
+import 'providers/auth_provider.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => const MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child: DevicePreview(
+        enabled: true,
+        builder: (context) => const MyApp(),
+      ),
     ),
   );
 }

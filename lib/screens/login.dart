@@ -1,106 +1,102 @@
-import 'package:coffee_shop/pallete.dart';
 import 'package:coffee_shop/screens/dashboard/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
+class LoginScreen extends StatelessWidget {
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  bool _isPasswordVisible = true;
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: CoffeeShopColors.cream,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Please login to continue',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: CoffeeShopColors.coffeeBrown,
-              ),
-            ),
-            SizedBox(height: 20),
-            SvgPicture.asset(
-              'assets/icons/coffee.svg',
-              height: 100,
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _passwordController,
-              obscureText: _isPasswordVisible,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _isPasswordVisible
-                        ? Icons.visibility
-                        : Icons.visibility_off,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _isPasswordVisible = !_isPasswordVisible;
-                    });
-                  },
+      backgroundColor: Colors.blueAccent,
+      body: Center(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Login Pemesanan Mobil',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                /**
-                *! ASAP waktu integrasi
-                *
-                String email = _emailController.text;
-                String password = _passwordController.text;
-                */
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
+              SizedBox(height: 20),
+              TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  labelStyle: TextStyle(color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.1),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                );
-              },
-              child: const Text('Login'),
-            ),
-            SizedBox(height: 12),
-            Text('or'.toUpperCase()),
-            SizedBox(height: 12),
-            ElevatedButton.icon(
-              onPressed: () {
-                // ! ASAP waktu integrasi
-              },
-              icon: SvgPicture.asset(
-                'assets/icons/google-plus.svg',
-                height: 24,
+                ),
+                style: TextStyle(color: Colors.white),
               ),
-              label: Text('Login with Google'),
-            ),
-          ],
+              SizedBox(height: 15),
+              TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.1),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                obscureText: true,
+                style: TextStyle(color: Colors.white),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  final username = _usernameController.text;
+                  final password = _passwordController.text;
+
+                  try {
+                    await Provider.of<AuthProvider>(context, listen: false)
+                        .login(username, password);
+
+                    if (Provider.of<AuthProvider>(context, listen: false)
+                        .isAuthenticated) {}
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                      ),
+                    );
+                  } catch (error) {
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const HomeScreen(),
+                    //   ),
+                    // );
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Login failed: $error'),
+                    ));
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orangeAccent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                ),
+                child: Text('Login'),
+              ),
+            ],
+          ),
         ),
       ),
     );

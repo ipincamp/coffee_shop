@@ -1,3 +1,4 @@
+import 'package:coffee_shop/screens/dashboard/setting.dart';
 import 'package:coffee_shop/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,13 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                    CircleAvatar(
+                  CircleAvatar(
                     radius: 40,
-                    child: SvgPicture.asset(
-                      'assets/icons/coffee.svg',
-                      fit: BoxFit.cover,
+                    backgroundImage: NetworkImage(
+                      'https://github.com/ipincamp.png?size=400',
                     ),
-                    ),
+                  ),
                   SizedBox(height: 10),
                   Text(
                     'Nur Arifin',
@@ -64,7 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
               leading: Icon(Icons.settings),
               title: Text('Settings'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingScreen(),
+                  ),
+                );
               },
             ),
             ListTile(
